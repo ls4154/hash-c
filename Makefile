@@ -7,10 +7,13 @@ OBJS_SHA256 = sha256_check.o sha256.o
 OBJS_SHA224 = sha224_check.o sha224.o
 OBJS_SHA512 = sha512_check.o sha512.o
 
-all : sha1_check sha256_check sha224_check sha512_check
+all : sha1_check sha0_check sha256_check sha224_check sha512_check
 
 sha1_check : $(OBJS_SHA1)
 	gcc -o sha1_check $(OBJS_SHA1)
+
+sha0_check : $(OBJS_SHA1)
+	gcc -o sha0_check $(OBJS_SHA1) -DSHA0
 
 sha256_check : $(OBJS_SHA256)
 	gcc -o sha256_check $(OBJS_SHA256)

@@ -26,8 +26,13 @@ static void _sha1_iterate(struct sha1_ctx *ctx, byte_t *chunk)
 			w[i] |= (word_t)*(chunk + 4 * i + j) << 8 * (3 - j);
 	}
 
+#ifdef SHA0
+	for (int i = 16; i < 80; ++i)
+		w[i] = w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16];
+#else
 	for (int i = 16; i < 80; ++i)
 		w[i] = ROL(w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16], 1);
+#endif
 
 	word_t a = ctx->h[0];
 	word_t b = ctx->h[1];
