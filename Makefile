@@ -1,4 +1,14 @@
+.SUFFIXES : .c .o
+CC = gcc
+CFLAGS = -O2
 
+OBJS_SHA1 = sha1_check.o sha1.o
+OBJS_SHA256 = sha256_check.o sha256.o
 
-sha1_check : sha1_check.c sha1.c
-	gcc -o sha1_check sha1_check.c sha1.c
+all : sha1_check sha256_check
+
+sha1_check : $(OBJS_SHA1)
+	gcc -o sha1_check $(OBJS_SHA1)
+
+sha256_check : $(OBJS_SHA256)
+	gcc -o sha256_check $(OBJS_SHA256)
