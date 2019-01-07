@@ -12,3 +12,6 @@ sha1_check : $(OBJS_SHA1)
 
 sha256_check : $(OBJS_SHA256)
 	gcc -o sha256_check $(OBJS_SHA256)
+
+clean :
+	rm $(OBJS_SHA1) $(OBJS_SHA256)
