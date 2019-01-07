@@ -4,6 +4,7 @@
 #include "sha256.h"
 
 #define ROR(x, n) (((x) >> (n)) | ((x) << (32 - (n))))
+#define SHR(x, n) ((x) >> (n))
 
 static const word_t k[64] = {
 	0x428a2f98u, 0x71374491u, 0xb5c0fbcfu, 0xe9b5dba5u,
@@ -49,8 +50,8 @@ static void _sha256_iterate(struct sha256_ctx *ctx, byte_t *chunk)
 	}
 
 	for (int i = 16; i < 64; ++i) {
-		word_t s0 = ROR(w[i - 15], 7) ^ ROR(w[i - 15], 18) ^ ROR(w[i - 15], 3);
-		word_t s1 = ROR(w[i - 2], 17) ^ ROR(w[i - 2], 19) ^ ROR(w[i - 2], 10);
+		word_t s0 = ROR(w[i - 15], 7) ^ ROR(w[i - 15], 18) ^ SHR(w[i - 15], 3);
+		word_t s1 = ROR(w[i - 2], 17) ^ ROR(w[i - 2], 19) ^ SHR(w[i - 2], 10);
 		w[i] = w[i - 16] + s0 + w[i - 7] + s1;
 	}
 
